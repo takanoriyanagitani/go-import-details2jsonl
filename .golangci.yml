@@ -1,0 +1,48 @@
+version: "2"
+
+linters:
+
+  default: all
+
+  disable:
+    - wsl
+    - wsl_v5
+    - ireturn
+    - nlreturn
+    - revive
+    - wrapcheck
+    - tagliatelle
+    - exhaustruct
+
+  settings:
+
+    depguard:
+      rules:
+        main:
+          files:
+            - $all
+          allow:
+            - $gostd
+            - golang.org/x/tools/go/analysis
+            - github.com/takanoriyanagitani/go-import-details2jsonl
+          deny:
+            - pkg: unsafe
+
+    nolintlint:
+      require-specific: true
+      require-explanation: true
+      allow-unused: false
+      allow-no-explanation:
+        - gochecknoglobals
+
+    govet:
+      enable-all: true
+      disable:
+      - fieldalignment
+
+    staticcheck:
+      checks:
+      - all
+      - -ST1023
+      - -ST1000
+      - -QF1011
